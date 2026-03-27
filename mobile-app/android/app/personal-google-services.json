@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "969740022136",
+    "project_id": "fir-project-e6945",
+    "storage_bucket": "fir-project-e6945.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:969740022136:android:6bfdaf99e29418ff0a988d",
+        "android_client_info": {
+          "package_name": "com.rockytaxi"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMu3QIQhNmViTLQ2QbnRRzHAnZa9COV5I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

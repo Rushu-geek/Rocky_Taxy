@@ -1,4 +1,4 @@
-package com.mobileapp
+package com.rockytaxi
 
 import android.app.Application
 import android.app.NotificationChannel
