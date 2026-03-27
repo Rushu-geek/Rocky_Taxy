@@ -1,5 +1,6 @@
 import React from 'react';
 import { StatusBar } from 'react-native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { AuthProvider } from './src/context/AuthContext';
 import { ToastProvider } from './src/context/ToastContext';
 import RootNavigator from './src/navigation/RootNavigator';
@@ -13,16 +14,18 @@ import { Colors } from './src/constants/theme';
 
 function App(): React.JSX.Element {
   return (
-    <ToastProvider>
-      <AuthProvider>
-        <StatusBar
-          barStyle="dark-content"
-          backgroundColor={Colors.background}
-          translucent={false}
-        />
-        <RootNavigator />
-      </AuthProvider>
-    </ToastProvider>
+    <SafeAreaProvider>
+      <ToastProvider>
+        <AuthProvider>
+          <StatusBar
+            barStyle="dark-content"
+            backgroundColor={Colors.background}
+            translucent={false}
+          />
+          <RootNavigator />
+        </AuthProvider>
+      </ToastProvider>
+    </SafeAreaProvider>
   );
 }
 

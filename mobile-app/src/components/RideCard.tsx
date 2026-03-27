@@ -21,7 +21,7 @@ const RideCard: React.FC<RideCardProps> = ({ ride, onPress, style }) => {
     ? ride.clientId as { name: string; phone: string }
     : null;
 
-  const formattedDate = new Date(ride.createdAt).toLocaleDateString('en-IN', {
+  const formattedDate = new Date(ride.createdAt).toLocaleDateString('en-CA', {
     day: 'numeric', month: 'short', year: 'numeric',
     hour: '2-digit', minute: '2-digit',
   });
@@ -56,7 +56,7 @@ const RideCard: React.FC<RideCardProps> = ({ ride, onPress, style }) => {
         </View>
         {ride.fare && (
           <View style={[styles.metaTag, styles.fareTag]}>
-            <Text style={styles.fareText}>₹{ride.fare}</Text>
+            <Text style={styles.fareText}>${ride.fare}</Text>
           </View>
         )}
       </View>

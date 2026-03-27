@@ -24,7 +24,7 @@ const FinanceDashboardScreen: React.FC = () => {
   const [showEnd, setShowEnd] = useState(false);
 
   const formatDate = (d: Date) =>
-    d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+    d.toLocaleDateString('en-CA', { day: 'numeric', month: 'short', year: 'numeric' });
 
   const handleFetch = () => {
     fetchEarnings(startDate.toISOString(), endDate.toISOString());
@@ -88,7 +88,7 @@ const FinanceDashboardScreen: React.FC = () => {
           <>
             <View style={[styles.summaryCard, Shadow.md]}>
               <Text style={styles.summaryLabel}>Total Earnings</Text>
-              <Text style={styles.totalAmount}>₹{earnings.totalEarnings.toLocaleString('en-IN')}</Text>
+              <Text style={styles.totalAmount}>${earnings.totalEarnings.toLocaleString('en-CA')}</Text>
               <Text style={styles.summaryMeta}>{earnings.count} ride{earnings.count !== 1 ? 's' : ''} completed</Text>
             </View>
 

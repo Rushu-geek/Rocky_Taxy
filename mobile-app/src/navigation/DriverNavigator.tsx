@@ -1,6 +1,7 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { View, StyleSheet, Platform } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Feather from 'react-native-vector-icons/Feather';
 import DriverHomeScreen from '../screens/driver/DriverHome.screen';
 import ActiveRideScreen from '../screens/driver/ActiveRide.screen';
@@ -16,11 +17,19 @@ export type DriverTabParamList = {
 const Tab = createBottomTabNavigator<DriverTabParamList>();
 
 const DriverNavigator = () => {
+  const insets = useSafeAreaInsets();
+
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
         headerShown: false,
-        tabBarStyle: styles.tabBar,
+        tabBarStyle: [
+          styles.tabBar,
+          {
+            height: 64 + insets.bottom,
+            paddingBottom: insets.bottom > 0 ? insets.bottom : 8,
+          }
+        ],
         tabBarActiveTintColor: Colors.accent,
         tabBarInactiveTintColor: 'rgba(255,255,255,0.4)',
         tabBarLabelStyle: styles.tabLabel,
@@ -61,8 +70,6 @@ const styles = StyleSheet.create({
   tabBar: {
     backgroundColor: Colors.primary,
     borderTopWidth: 0,
-    height: Platform.OS === 'ios' ? 82 : 64,
-    paddingBottom: Platform.OS === 'ios' ? 22 : 8,
     paddingTop: 8,
   },
   tabItem: {

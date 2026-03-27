@@ -7,8 +7,12 @@ import { Platform } from 'react-native';
 // Physical iPhone: replace localhost with your Mac's LAN IP (ipconfig getifaddr en0).
 const BASE_URL =
   Platform.OS === 'android'
-    ? 'http://10.0.2.2:3000/api'
-    : 'http://localhost:3000/api';
+    ?
+    // 'http://10.0.2.2:3000/api'
+    'https://app.bullstreetedge.com/rocky-api/api'
+    :
+    // 'http://localhost:3000/api';
+    'https://app.bullstreetedge.com/rocky-api/api'
 
 export const TOKEN_KEY = '@taxi_app_token';
 export const USER_KEY = '@taxi_app_user';

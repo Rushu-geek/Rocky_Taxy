@@ -269,7 +269,7 @@ const BookRideScreen: React.FC = () => {
                   onPress={() => setShowDatePicker(true)}
                 >
                   <Text style={styles.dateButtonText}>
-                    📅 {scheduledDate.toLocaleString('en-IN', {
+                    📅 {scheduledDate.toLocaleString('en-CA', {
                       dateStyle: 'medium',
                       timeStyle: 'short',
                     })}

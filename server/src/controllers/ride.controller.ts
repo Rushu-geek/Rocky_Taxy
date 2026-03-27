@@ -236,7 +236,7 @@ export const endRide = async (req: Request, res: Response): Promise<void> => {
         client.fcmToken,
         {
           title: '🏁 Ride Completed!',
-          body: `Your ride has ended. Total fare: ₹${fare}`,
+          body: `Your ride has ended. Total fare: $${fare}`,
           data: { type: 'RIDE_ENDED', rideId: id },
         },
         String(client._id)

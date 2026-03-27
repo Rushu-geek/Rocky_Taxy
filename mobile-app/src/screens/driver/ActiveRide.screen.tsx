@@ -49,7 +49,7 @@ const isReadyToStart = (r: Ride) =>
   r.status === 'ACCEPTED' && !isUpcoming(r);
 
 const formatScheduled = (dateStr: string) =>
-  new Date(dateStr).toLocaleDateString('en-IN', {
+  new Date(dateStr).toLocaleDateString('en-CA', {
     weekday: 'short', day: 'numeric', month: 'short',
     hour: '2-digit', minute: '2-digit',
   });
@@ -219,7 +219,7 @@ const ActiveRideScreen: React.FC = () => {
                 <View style={[styles.card, Shadow.sm]}>
                   <Text style={styles.cardLabel}>Collect Fare</Text>
                   <InputField
-                    label="Fare Amount (₹)"
+                    label="Fare Amount ($)"
                     value={fare}
                     onChangeText={(t) => { setFare(t); setFareError(''); }}
                     error={fareError}

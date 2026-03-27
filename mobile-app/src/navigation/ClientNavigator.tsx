@@ -1,6 +1,7 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { View, Text, StyleSheet, Platform } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Feather from 'react-native-vector-icons/Feather';
 import ClientHomeScreen from '../screens/client/ClientHome.screen';
 import BookRideScreen from '../screens/client/BookRide.screen';
@@ -16,11 +17,19 @@ export type ClientTabParamList = {
 const Tab = createBottomTabNavigator<ClientTabParamList>();
 
 const ClientNavigator = () => {
+  const insets = useSafeAreaInsets();
+
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
         headerShown: false,
-        tabBarStyle: styles.tabBar,
+        tabBarStyle: [
+          styles.tabBar,
+          {
+            height: 64 + insets.bottom,
+            paddingBottom: insets.bottom > 0 ? insets.bottom : 8,
+          }
+        ],
         tabBarActiveTintColor: Colors.accent,
         tabBarInactiveTintColor: 'rgba(255,255,255,0.4)',
         tabBarLabelStyle: styles.tabLabel,
@@ -61,8 +70,6 @@ const styles = StyleSheet.create({
   tabBar: {
     backgroundColor: Colors.primary,   // Pure black — Uber-style
     borderTopWidth: 0,
-    height: Platform.OS === 'ios' ? 82 : 64,
-    paddingBottom: Platform.OS === 'ios' ? 22 : 8,
     paddingTop: 8,
   },
   tabItem: {
