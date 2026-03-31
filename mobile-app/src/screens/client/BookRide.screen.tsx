@@ -8,24 +8,10 @@ import CustomDatePicker from '../../components/CustomDatePicker';
 import Feather from 'react-native-vector-icons/Feather';
 import { useRide } from '../../hooks/useRide';
 import InputField from '../../components/InputField';
-import Dropdown, { DropdownOption } from '../../components/Dropdown';
+import LocationAutocomplete from '../../components/LocationAutocomplete';
 import PrimaryButton from '../../components/PrimaryButton';
 import { Colors, Typography, Spacing, BorderRadius, Shadow } from '../../constants/theme';
 import { getCurrentPosition, isGeolocationAvailable, GeoPosition, GeoError } from '../../utils/geolocation';
-
-const PRESET_LOCATIONS: DropdownOption[] = [
-  { label: '✈️ Airport Terminal 1', value: 'Airport Terminal 1' },
-  { label: '✈️ Airport Terminal 2', value: 'Airport Terminal 2' },
-  { label: '🏙️ City Center', value: 'City Center' },
-  { label: '🏥 City Hospital', value: 'City Hospital' },
-  { label: '🏢 Business District', value: 'Business District' },
-  { label: '🛍️ Central Mall', value: 'Central Mall' },
-  { label: '🚉 Railway Station', value: 'Railway Station' },
-  { label: '🎓 University Campus', value: 'University Campus' },
-  { label: '🏨 Grand Hotel', value: 'Grand Hotel' },
-  { label: '🏠 Residential Zone A', value: 'Residential Zone A' },
-  { label: '🏠 Residential Zone B', value: 'Residential Zone B' },
-];
 
 /** Request location permission on Android; iOS prompts automatically on first GPS call. */
 async function requestLocationPermission(): Promise<boolean> {
@@ -95,7 +81,7 @@ const BookRideScreen: React.FC = () => {
   const [error, setError] = useState('');
 
   // Location state
-  const [locationOptions, setLocationOptions] = useState<DropdownOption[]>(PRESET_LOCATIONS);
+  const [currentLocationText, setCurrentLocationText] = useState('');
   const [locationLoading, setLocationLoading] = useState(false);
   const [locationDenied, setLocationDenied] = useState(false);
   const locationFetched = useRef(false);
@@ -126,12 +112,7 @@ const BookRideScreen: React.FC = () => {
           const { latitude, longitude } = position.coords;
           const address = await reverseGeocode(latitude, longitude);
 
-          const currentLocOption: DropdownOption = {
-            label: `📍 ${address}`,
-            value: address,
-          };
-
-          setLocationOptions([currentLocOption, ...PRESET_LOCATIONS]);
+          setCurrentLocationText(`📍 ${address}`);
           setFrom(address);
           setLocationLoading(false);
         },
@@ -214,24 +195,21 @@ const BookRideScreen: React.FC = () => {
               </View>
             )}
 
-            <Dropdown
+            <LocationAutocomplete
               label="Pickup Location"
               value={from}
-              options={locationOptions}
-              onSelect={(opt) => { setFrom(opt.value); setErrors((p) => ({ ...p, from: '' })); }}
+              currentLocationText={currentLocationText}
+              onSelect={(val) => { setFrom(val); setErrors((p) => ({ ...p, from: '' })); }}
               placeholder={locationLoading ? '📍 Detecting your location…' : 'Select pickup point'}
               error={errors.from}
-              searchable
             />
 
-            <Dropdown
+            <LocationAutocomplete
               label="Destination"
               value={to}
-              options={PRESET_LOCATIONS}
-              onSelect={(opt) => { setTo(opt.value); setErrors((p) => ({ ...p, to: '' })); }}
+              onSelect={(val) => { setTo(val); setErrors((p) => ({ ...p, to: '' })); }}
               placeholder="Select destination"
               error={errors.to}
-              searchable
             />
 
             <InputField
